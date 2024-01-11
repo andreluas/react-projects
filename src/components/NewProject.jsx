@@ -1,10 +1,24 @@
 import { useRef } from "react";
 import Input from "./Input";
 
-export default function NewProject() {
+export default function NewProject({ onAdd }) {
   const titleRef = useRef();
   const descriptionRef = useRef();
   const dueDateRef = useRef();
+
+  function handleSave() {
+    const enteredTitle = titleRef.current.value;
+    const enteredDescription = descriptionRef.current.value;
+    const enteredDueDate = dueDateRef.current.value;
+
+    // validation... do latter
+
+    onAdd({
+      title: enteredTitle,
+      description: enteredDescription,
+      dueDate: enteredDueDate,
+    });
+  }
 
   return (
     <div className="w-[35rem] mt-16">
@@ -15,15 +29,18 @@ export default function NewProject() {
           </button>
         </li>
         <li>
-          <button className="px-6 py-2 rounded-md bg-stone-800 text-stone-50 hover:bg-stone-950">
+          <button
+            onClick={handleSave}
+            className="px-6 py-2 rounded-md bg-stone-800 text-stone-50 hover:bg-stone-950"
+          >
             Save
           </button>
         </li>
       </menu>
       <div>
         <Input ref={titleRef} label="Title" />
-        <Input label="Description" textarea={true} />
-        <Input label="Due Date" />
+        <Input ref={descriptionRef} label="Description" textarea={true} />
+        <Input ref={dueDateRef} label="Due Date" />
       </div>
     </div>
   );
