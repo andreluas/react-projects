@@ -11,7 +11,13 @@ export default function NewProject({ onAdd }) {
     const enteredDescription = descriptionRef.current.value;
     const enteredDueDate = dueDateRef.current.value;
 
-    // validation... do latter
+    if (
+      enteredTitle.trim() === "" ||
+      enteredDescription.trim() === "" ||
+      enteredDueDate.trim() === ""
+    ) {
+      
+    }
 
     onAdd({
       title: enteredTitle,
@@ -38,9 +44,9 @@ export default function NewProject({ onAdd }) {
         </li>
       </menu>
       <div>
-        <Input ref={titleRef} label="Title" />
+        <Input type="text" ref={titleRef} label="Title" />
         <Input ref={descriptionRef} label="Description" textarea={true} />
-        <Input ref={dueDateRef} label="Due Date" />
+        <Input type="date" ref={dueDateRef} label="Due Date" />
       </div>
     </div>
   );
